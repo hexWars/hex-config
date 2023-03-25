@@ -9,7 +9,7 @@
 
 ### starshop.toml
 
-走简约风了
+走简约风了,配色参考dracula，参考的这个[预设](https://starship.rs/presets/#no-nerd-fonts)然后简单修改
 
-![](./2.png)
+![](./3.png)
 
