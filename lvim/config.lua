@@ -20,17 +20,10 @@ lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<Space>r"] = ":RustRun<CR>"
+-- 需要安装xclip才能使用，在visual模式下按下空格和y可以复制到浏览器
+lvim.keys.visual_mode["<Space>y"] = ":w !xclip -selection clipboard<CR>"
 
-local Terminal  = require('toggleterm.terminal').Terminal
-local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
 
-function _lazygit_toggle()
-  lazygit:toggle()
-end
-
-vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
-
-lvim.keys.normal_mode["<M-2>"] = "<cmd>lua _lazygit_toggle()<CR>"
 
 -- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 -- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
@@ -200,6 +193,34 @@ lvim.plugins = {
       vim.api.nvim_set_keymap("n", "s", ":HopChar2<cr>", { silent = true })
       vim.api.nvim_set_keymap("n", "S", ":HopWord<cr>", { silent = true })
       vim.api.nvim_set_keymap("n", "m", ":HopLine<cr>", { silent = true })
+    end,
+  },
+  {
+    "zbirenbaum/neodim",
+    lazy = true,
+    event = "LspAttach",
+    config = function()
+        require("neodim").setup({
+            alpha = 0.75,
+            blend_color = "#000000",
+            update_in_insert = {
+                enable = true,
+                delay = 100,
+            },
+            hide = {
+                virtual_text = true,
+                signs = false,
+                underline = false,
+            },
+        })
+    end,
+  },
+  {
+    "nvim-zh/colorful-winsep.nvim",
+    lazy = true,
+    event = "WinNew",
+    config = function()
+        require("colorful-winsep").setup()
     end,
   },
 }
