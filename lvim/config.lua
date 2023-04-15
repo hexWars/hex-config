@@ -8,10 +8,20 @@ an executable
 ]]
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
+-- vim options
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.opt.relativenumber = true
+
 -- general
-lvim.log.level = "warn"
-lvim.format_on_save.enabled = false
+lvim.log.level = "info"
 lvim.colorscheme = "lunar"
+lvim.format_on_save = {
+  enabled = false,
+  pattern = "*.lua",
+  timeout = 1000,
+}
+
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
@@ -19,7 +29,6 @@ lvim.colorscheme = "lunar"
 lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
-lvim.keys.normal_mode["<Space>r"] = ":RustRun<CR>"
 -- 需要安装xclip才能使用，在visual模式下按下空格和y可以复制到浏览器
 lvim.keys.visual_mode["<Space>y"] = ":w !xclip -selection clipboard<CR>"
 
@@ -73,9 +82,11 @@ lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
-lvim.builtin.treesitter.rainbow.enable = true
 
--- if you don't want all the parsers change this to a table of the ones you want
+---- treesitter配置
+-- treesitter彩虹括号
+lvim.builtin.treesitter.rainbow.enable = true
+-- 语法解析器，可以添加语言
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
   "c",
@@ -90,8 +101,9 @@ lvim.builtin.treesitter.ensure_installed = {
   "java",
   "yaml",
 }
-
+-- 指定语言不安装语法解析器
 lvim.builtin.treesitter.ignore_install = { "haskell" }
+-- 启用语法高亮
 lvim.builtin.treesitter.highlight.enable = true
 
 -- generic LSP settings
@@ -171,13 +183,16 @@ lvim.builtin.treesitter.highlight.enable = true
 
 -- Additional Plugins
 lvim.plugins = {
+  -- 诊断、快速修复和查看LSP，只有输入了cmd = "TroubleToggle"才能加载
   {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
   },
+  -- 基于tree-sitter的彩虹括号插件
   {
     "mrjones2014/nvim-ts-rainbow",
   },
+  -- 高亮源代码中的TODO、FIXME等注释
   {
     "folke/todo-comments.nvim",
     event = "BufRead",
@@ -185,6 +200,7 @@ lvim.plugins = {
       require("todo-comments").setup()
     end,
   },
+  -- 快速跳转插件
   {
     "phaazon/hop.nvim",
     event = "BufRead",
@@ -195,6 +211,7 @@ lvim.plugins = {
       vim.api.nvim_set_keymap("n", "m", ":HopLine<cr>", { silent = true })
     end,
   },
+  -- 活动窗口高亮突出显示
   {
     "zbirenbaum/neodim",
     lazy = true,
@@ -215,6 +232,7 @@ lvim.plugins = {
         })
     end,
   },
+  -- 窗口分隔符添加彩色渐变效果
   {
     "nvim-zh/colorful-winsep.nvim",
     lazy = true,
