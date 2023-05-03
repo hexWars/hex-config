@@ -26,7 +26,12 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- 需要安装xclip才能使用，在visual模式下按下空格和y可以复制到浏览器
 lvim.keys.visual_mode["<Space>y"] = ":w !xclip -selection clipboard<CR><CR>"
 -- Telescope跳转到引用
-lvim.keys.visual_mode["<Space>j"] = ":Telescope lsp_references<CR>"
+lvim.keys.normal_mode["<Space>r"] = ":Telescope lsp_references<CR>"
+-- 标签页跳转
+lvim.keys.normal_mode["<Space>j"] = ":bnext<CR>"
+lvim.keys.normal_mode["<Space>k"] = ":bprevious<CR>"
+
+
 
 -- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 -- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
