@@ -11,6 +11,9 @@ bash setup.sh
 
 # 配置列表
 
+- ✅表示`setup.sh`可自动配置
+- ❌表示不再使用
+
 本仓库包括以下配置:
 
 ## astronvim ✅
