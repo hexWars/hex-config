@@ -4,7 +4,7 @@
 function show_menu {
     echo "执行以下选项："
     echo "1. 配置 Astronvim"
-    echo "2. 退出"
+    echo "0. 退出"
 }
 
 # 执行 Astronvim 配置的操作
@@ -41,7 +41,7 @@ while true; do
         1)
             configure_astronvim
             ;;
-        2)
+        0)
             echo "退出程序。"
             exit 0
             ;;
